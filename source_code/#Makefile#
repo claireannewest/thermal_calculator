@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-c -Wall -iquote/usr/local/lib/include
+CFLAGS=-c -Wall -iquote/Users/clairewest/werk/research/ -iquote/usr/local/lib/include
 
 all: TDDA
 
