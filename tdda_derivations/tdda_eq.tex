@@ -1,0 +1,261 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsmath} 
+%\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+%\usepackage{txfonts} 
+%\usepackage{textcomp} 
+\usepackage{color}
+\usepackage{parskip}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
+
+\renewcommand{\arraystretch}{1.5}
+\setlength{\headheight}{-12pt}
+\setlength{\topmargin}{-20pt}
+\setlength{\evensidemargin}{0.0in}
+\setlength{\oddsidemargin}{0.0in}
+\setlength{\textheight}{9in}
+\setlength{\textwidth}{6.5in}
+\setlength{\parindent}{0pt}
+
+\linespread{1.2}
+
+\begin{document}
+
+\section{Heat power on a lattice cube}
+This is the power absorbed by a point dipole located at the center of a cube. 
+\begin{equation}
+Q_j = \frac{1}{\tau} \int_0^\tau \textrm{Re}[E_j] \cdot \textrm{Re}[\dot{p_j}] dt
+\end{equation}
+where $\tau = \frac{2 \pi}{\omega}, E_j = E_0 e^{-i \omega t}, $ and $ p_j = p_0 e^{-i \omega t} $ where $E_0$ and $p_0$ are complex. Next I will write expressions for $\textrm{Re}[E_j]$
+\begin{equation}
+\begin{split}
+\textrm{Re}[E_j] &= \textrm{Re} \left [(E_{0j}^R + i E_{0j}^I)(\cos{\omega t} - i \sin{\omega t}) \right ] \\ 
+&= E_{0j}^R \cos \omega t + E_{0j}^I \sin \omega t 
+\end{split}
+\end{equation}
+
+and for $\textrm{Re}[{p}_j]$
+
+\begin{equation}
+\begin{split}
+\textrm{Re}[p_j] &= \textrm{Re} \left [(p_{0j}^R + i p_{0j}^I)(\cos{\omega t} - i \sin{\omega t}) \right ] \\
+\textrm{Re}[\dot{p_j}] &= \textrm{Re} \left [(p_{0j}^R + i p_{0j}^I)(-\omega \sin \omega t - \omega i \cos \omega t) \right ] \\ 
+&= -\omega p_{0j}^R \sin \omega t + \omega p_{0j}^I \cos \omega t
+\end{split}
+\end{equation}
+
+Now I can plug this back into the expression for heat power: 
+\begin{equation}
+Q_j = \frac{\omega}{2 \pi} \int_0^{2 \pi / \omega} \left ( E_{0j}^R \cos \omega t + E_{0j}^I \sin \omega t \right ) \left(-\omega p_{0j}^R \sin \omega t + \omega p_{0j}^I \cos \omega t \right)  dt 
+\end{equation}
+
+The $\cos \omega t \sin \omega t $ terms are integrated to zero, and the $ \sin^2{\omega t}$ and $ \cos^2{\omega t}$ terms integrated to $\pi/\omega $. Plugging everything in gives: 
+
+\begin{equation}
+Q_j = \frac{\omega}{2} \left ( E_{0j}^R  p_{0j}^I  -  E_{0j}^I  p_{0j}^R  \right)  
+\end{equation}
+
+Now, I want to rewrite the dipole moments, $p_j$, in terms of the linear polarizability, $\alpha$, for which we will later plug in the Claussious-Mossati polarizability. The dipole moment is defined as:
+\begin{equation}
+p_{0j} = \alpha_j E_{0j} = \left ( \alpha_j^R + i \alpha_j^I \right ) \left ( E_{0j}^R + i E_{0j}^I \right )
+\end{equation}
+
+\begin{equation*}
+p_{0j}^I = \alpha_j^R  E_{0j}^I + \alpha_j^I  E_{0j}^R \quad \textrm{ and } \quad p_{0j}^R = \alpha_j^R  E_{0j}^R - \alpha_j^I  E_{0j}^I
+\end{equation*}
+
+Now, I can plug in these dipole moment expressions into the heat power.
+\begin{equation}
+\begin{split}
+Q_j &= \frac{\omega}{2} \left ( E_{0j}^R( \alpha_j^R  E_{0j}^I + \alpha_j^I  E_{0j}^R)  -  E_{0j}^I (\alpha_j^R  E_{0j}^R - \alpha_j^I  E_{0j}^I)   \right)  \\
+&= \frac{\omega}{2} \alpha_j^I \left ( E_{0j}^R E_{0j}^R + E_{0j}^I E_{0j}^I  \right ) = \frac{\omega}{2} \alpha_j^I \left |E_{0j} \right | ^2
+\end{split}
+\end{equation}
+
+Next, I'd like to write this equation in terms of DDA inputs. Writing the equation again: 
+\begin{equation}
+Q_j = \frac{\omega}{2} \alpha_j^I \left |E_{0j} \right | ^2
+\end{equation}
+
+I need to rewrite $\omega$, $\alpha_j$, and $E_{0j}$. First looking at $\omega$, this can be rewritten as: $\omega = 2 \pi c / \lambda = 2 \pi c n /\lambda_0$ where $\lambda_0$ is the wavelength in vacuum. Next, I need to rewrite $\alpha_j^I$. This can be done using the Clausius -- Mossotti polarizability. Note that this equation is found in Draine's paper.[1] 
+\begin{equation}
+\alpha_j = \frac{3a^3 }{4 \pi} \frac{ \epsilon_j - \epsilon_b}{\epsilon_j + 2 \epsilon_b} 
+\end{equation}
+In the above equation, a is the dipole spacing, $\epsilon_b$ is the dielectric constant of the background, and $\epsilon_j$ is the complex dielectric function of the target. The last step is to take the imaginary part of $\alpha_j$. 
+
+\begin{equation}
+\frac{ \epsilon_j - \epsilon_b}{\epsilon_j + 2 \epsilon_b} = \frac{\epsilon_j^R + i \epsilon_j^I - \epsilon_b}{\epsilon_j^R + i \epsilon_j^I + 2 \epsilon_b} =  \frac{(\epsilon_j^R + i \epsilon_j^I - \epsilon_b)(\epsilon_j^R - i \epsilon_j^I + 2 \epsilon_b)}{ \left | \epsilon_j + 2 \epsilon_b \right | ^2}
+\end{equation}
+Now, taking the imaginary part of $\alpha_j$.
+
+\begin{equation}
+\begin{split}
+\alpha_j^I &= \frac{3a^3 }{4 \pi}   \frac{-\epsilon_j^R \epsilon_j^I + \epsilon_j ^I \epsilon_j^R + 2 \epsilon_b \epsilon_j + \epsilon_j \epsilon_j^I}{ \left | \epsilon_j + 2 \epsilon_b \right | ^2} \\
+&= \frac{3a^3 }{4 \pi} \frac{3 \epsilon_b \epsilon_j^I}{(\epsilon_j^R)^2 + (\epsilon_j^I)^2 + 4 \epsilon_j^R \epsilon_b + 4 \epsilon_b^2}
+\end{split}
+\end{equation}
+
+I will define the right-hand side fraction as the variable: $\textrm{pol}\_\textrm{factor}$, so that:
+
+\begin{equation}
+\alpha_j^I =  \frac{3a^3 }{4 \pi} \textrm{pol}\_\textrm{factor}
+\end{equation}
+
+The very last step is to multiply the heat power by $1 = \frac{I_0}{I_0} = \frac{c/8 \pi |E_0|^2 }{c/8 \pi |E_0|^2} $. Note that the factor of n does not appear here because the intensity is vacuum, and the $E_0$ is also in vacuum. Plugging everything in: 
+
+\begin{equation}
+\begin{split}
+Q_j &= \frac{\omega}{2} \alpha_j^I \left |E_{0j} \right | ^2 \\
+&= \frac{2 \pi c n}{2 \lambda_0} \frac{ 3 a ^3}{4 \pi} \textrm{pol}\_\textrm{factor} \left |E_{0j} \right | ^2 \frac{c/8 \pi |E_0|^2 }{c/8 \pi |E_0|^2} \\
+&= \frac{6 \pi n}{\lambda_0} a ^3 \textrm{pol}\_\textrm{factor }  I_0 \frac{\left |E_{0j} \right | ^2}{|E_0|^2}
+\end{split}
+\end{equation}
+
+The units for this equation need to be in Gaussian, since this is what I used to define $I_0$. Written explicitly: 
+\begin{equation}
+[\lambda ] = \textrm{cm} \quad [a] = \frac{\textrm{cm}}{\textrm{lattice spacing}} \quad [I_0] = \frac{\textrm{g}}{\textrm{s}^3}
+\end{equation}
+
+However, what is coded in tDDA is slightly different. 
+
+\begin{equation} 
+Q_j = \frac{6 n \pi}{\lambda} (\textrm{unit} \textrm{ d}) ^3 \textrm{ pol}\_\textrm{factor }  I_0 \frac{\left |E_{0j} \right | ^2}{|E_0|^2} 10^{-18}
+\end{equation}
+
+
+In the above equation, the units need to be:
+\begin{equation} 
+[\lambda ] = \textrm{m} \quad [\textrm{unit}] = \frac{\textrm{nm}}{\textrm{lattice spacing}} \quad [d] = \textrm{lattice spacing} \quad [I_0] = \frac{\textrm{W}}{\textrm{m}^2}
+\end{equation}
+
+The extra factor of $10^{-18}$ comes in from converting all the above units so that the output is in $\textrm{nW}$. However, there is still a discrepancy because Q should actually be in Gaussian units! \textcolor{red}{There should be a factor that converts from SI to Gaussian.}
+%Assuming all of the above is true, I'll try to solve for the extra factor of $10^{-18}.$ To do this, I will define $\chi$ as the factor the corrects for the units, that should be equal to $10^{-18}.$
+
+%\begin{equation} 
+%\begin{split}
+%\left ( \frac{1}{m} (nm)^3 \frac{kg}{s} \right ) \chi &= \frac{1}{cm} (cm)^3 \frac{g}{s^3} \\
+%\chi = 10^{20} \neq 10^{-18}
+%\end{split}
+%\end{equation}
+
+\section{Derive Lattice Green's Function}
+\subsection{Discretized heat diffusion equation}
+
+First I will start with the continuous heat diffusion equation: 
+\begin{equation}
+\nabla ^2 T (\textbf{x}) = -\frac{1}{\kappa} q( \textbf{x} )
+\end{equation}
+where $q( \textbf{x} )$ is the heat power density. We treat the target and the perturbation separately, so $\kappa$ refers to the thermal conductivity at $\textbf{x}$. Since dda and tdda act on a lattice, the above equation needs to be discretized to be evaluated at discrete points. This can be done using the central difference formula. This can be derived in 1D using the definition of a derivative:
+\begin{equation}
+\begin{split}
+\frac{\partial ^2}{\partial x^2} T & \approx \frac{\partial}{\partial x} \left [ \frac{ T( x + a ) - T(x)}{a} \right ] \\
+&=  \frac{1}{a} \left [ \frac{T( x + a - a) - T(x + a)}{-a} - \frac{T(x-a) - T(x)}{-a} \right ] \\
+&=\frac{1}{a^2} \left [T(x + a) - 2 T(x) + T(x - a) \right ] 
+\end{split}
+\end{equation} 
+
+Putting everything together, 
+\begin{equation}
+T(x + a) - 2 T(x) + T(x - a) = - a^2 \frac{1}{\kappa} q(x)
+\end{equation}
+
+Now, assume that x is on a 3D lattice. This means that $x \rightarrow \textbf{r}_n = n_1 \textbf{a}_1 + n_2 \textbf{a}_2 + n_3 \textbf{a}_3 $ where $n_i = \textrm{integer}$, $\textbf{a}_i = a \hat{\textbf{x}}_i$. Lastly, for simplicity I will call the right hand side $f(\textbf{r}_n)$. Putting all of this together, 
+\begin{equation}
+\sum_{i=1}^3 \left [ T(\textbf{r}_n + \textbf{a}_i)  - 2T(\textbf{r}_n) + T(\textbf{r}_n - \textbf{a}_i) \right ] = f (\textbf{r}_n)
+\end{equation}
+
+For the rest of this derivation, I will be using Dirac notation and following [3] this paper. 
+\begin{equation}
+\mathcal{L} \ket{T} = \ket{f}
+\end{equation}
+
+In the lattice basis:
+\begin{equation}
+\begin{split}
+\ket{T} &= \sum_n \ket{n} \braket{n}{T} = \sum_n \ T(\textbf{r}_n \ket{n} \\
+\ket{f} &= \sum_n \ket{n} \braket{n}{f} = \sum_n \ f(\textbf{r}_n \ket{n}
+\end{split}
+\end{equation}
+
+blah blah blah 
+
+\begin{equation}
+G(p_1, p_2, p_3) = \frac{1}{(2 \pi )^3} \int_0^\pi \int_0^\pi \int_0^\pi \frac{\cos(x_1 p_1) \cos(x_2 p_2) \cos(x_3 p_3)}{3 - \cos x_1 -  \cos x_2 - \cos x_3} dx_1 dx_2 dx_3 
+\end{equation}
+
+Now, I'll multiply by $1 = \frac{i}{i}$  for reasons that will become apparent in a few lines. 
+
+\begin{equation}
+G(p_1, p_2, p_3) = \frac{i}{(2 \pi )^3} \int_0^\pi \int_0^\pi \int_0^\pi \frac{\cos(x_1 p_1) \cos(x_2 p_2) \cos(x_3 p_3)}{i(3 - \cos x_1 -  \cos x_2 - \cos x_3)} dx_1 dx_2 dx_3 
+\end{equation}
+
+Now this equation can be rewritten in a computationally tactful way using Bessel functions. I'll use the property: 
+
+\begin{equation} 
+\int_0^\infty e^{- \alpha t} dt = - \frac{1}{\alpha} e^{- \alpha t }  \, \Big  |_0 ^\infty = \frac{1}{\alpha}
+\end{equation}
+
+So I can rewrite the Green's function using this property in the denominator.
+\begin{multline}
+G(p_1, p_2, p_3) = \frac{i}{(2 \pi )^3} \int_0^\pi \int_0^\pi \int_0^\pi \int_0^\infty e^{- i(3  - \cos x_1 -  \cos x_2 - \cos x_3)t} \\  \cos(x_1 p_1) \cos(x_2 p_2) \cos(x_3 p_3) dt dx_1 dx_2 dx_3 
+\end{multline}
+
+Now my integrals are in the correct form to subsitiute in Bessel functions. Given the definition of a Bessel function:
+
+\begin{equation}
+J_p(t) = \frac{i^{-p}}{\pi} \int_0^\pi e^{i t \cos x} \cos(p x) dx
+\end{equation}
+
+my Green's function now becomes: 
+
+\begin{equation}
+\begin{split}
+G(p_1, p_2, p_3) &= \frac{i}{(2 \pi )^3} \int_0^\infty e^{-i3t} (J_{p_1}(t) \pi i^{p_1}) (J_{p_2}(t) \pi i^{p_2}) (J_{p_3}(t) \pi i^{p_3})  dt \\
+&= \frac{i^{1 + p_1 + p_2 + p_3}\pi ^3}{(2 \pi )^3} \int_0^\infty J_{p_1}(t) J_{p_2}(t) J_{p_3}(t) dt
+\end{split}
+\end{equation}
+
+\subsubsection{Matching with MATLAB code}
+%So at some point I'll need to Tex up the notes for deriving the Green's function, but I'll just write the result for now from [2].
+%\begin{equation}
+%G(E; l, m, n) = \int_0^\infty dt e^{-Et}I_l(t)I_m(t)I_n(t)
+%\end{equation}
+
+
+% Here is the function being integrated.
+% \begin{equation}
+% F(t) = i^{l + m + n + 1} e^{-i3t} J_l(t) J_m(t) J_n(t) 
+% \end{equation}
+% The composite Simpson's rule for numerically evaluating integrals is:
+
+% \begin{equation}
+% \int_{x_0}^{x_n} f(x) dx \approx \frac{x_n-x_0}{6} \left [ f(x_0) + 2 \sum_{j=1}^{n/2 -1} f(x_{2j}) + 4 \sum_{j=1}^{n/2} f(x_{2j-1}) + f(x_n) \right ]
+% \end{equation}
+ 
+
+% The numeric implementation of this is: 
+% \begin{equation}
+% \textrm{result} =  \frac{1}{2} \textrm{Re} \left [ \frac{1}{6}dt  \left [F(t_{min}) +  F(t_{max}) + 2 \sum F(t_{cap}) + 4 \sum F(t_{mid}) \right ] + \frac{e^{i \pi /4}}{t_{max}\sqrt{2 \pi ^3}} \right ]
+% \end{equation}
+% I'm not sure how to derive the constant on the right, and the 1/2 Re.
+% \begin{equation}
+% \textrm{result} = \frac{1}{2} \textrm{Re} \left [ \textrm{integral} + \frac{e^{i \pi /4}}{t_{max}\sqrt{2 \pi ^3}} \right ] 
+% \end{equation} 
+
+ 
+
+
+
+
+\section{References}
+[1] B. T. Draine and P. J. Flatau. "Discrete-dipole approximation for scattering calculations." Vol. 11, No. 4/April 1994/J. Opt. Soc. Am. A
+
+[2] Cserti, J. "Application of the lattice Green's function for calculating the resistance of infinite networks of resistors." arxiv
+
+[3] Hollos, S. "A Lattice Green Function Introduction"
+\end{document}
