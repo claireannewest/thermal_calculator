@@ -30,16 +30,15 @@ def lattice_green_integrator_high(l,m,n):
     return result
 
 
-for l in range(0,61):
-    for m in range(0, 1001):
-        for n in range(0, 501):
-            fileID = open("myGreen.num_dimer", "a")
-            if l >= 60 or m >= 1000 or n >= 100:
-                if np.sqrt(l**2 + m**2 + n**2) <= np.sqrt(300.0):
-                    fileID.write(str(l) + ' ' + str(m) + ' ' + str(n) + ' ' + str(lattice_green_integrator(l,m,n)) + '\n')
-                    fileID.close()
-                else:  
-                    fileID.write(str(l) + ' ' + str(m) + ' ' + str(n) + ' ' + str(lattice_green_integrator_high(l,m,n)) + '\n')
-                    fileID.close()
+for l in range(0,20):
+    for m in range(0, 20):
+        for n in range(0, 20):
+            fileID = open("Green.num_20", 'w')
+            if np.sqrt(l**2 + m**2 + n**2) <= np.sqrt(300.0):
+                fileID.write(str(l) + ' ' + str(m) + ' ' + str(n) + ' ' + str(lattice_green_integrator(l,m,n)) + '\n')
+                fileID.close()
+            else:  
+                fileID.write(str(l) + ' ' + str(m) + ' ' + str(n) + ' ' + str(lattice_green_integrator_high(l,m,n)) + '\n')
+                fileID.close()
                     
 
