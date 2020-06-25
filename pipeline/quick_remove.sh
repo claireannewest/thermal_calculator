@@ -9,3 +9,4 @@ rm *w000*
 rm temp.out
 rm temp-shift.txt
 rm tdda_input
+rm ddfield.in

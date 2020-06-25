@@ -1,0 +1,9 @@
+ DDSCAT --- DDSCAT 7.3.2 [18.08.29]   
+ TARGET --- Sphere shape                                                      
+ PBCGS2 --- method of solution 
+ GKDLDR --- prescription for polarizabilities
+ FROM_FILE --- shape 
+   4169 = NAT0 = number of dipoles
+ auJC.tab                                                    
+  wave(um)   f(cm-1)     Re(m)     Im(m)    Re(eps)   Im(eps)
+ 1.4730E+00 6.7889E+03 3.180E-01 6.883E+00-4.727E+01 4.378E+00

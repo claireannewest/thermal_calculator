@@ -29,16 +29,13 @@ def lattice_green_integrator_high(l,m,n):
     result = 1.0/2*(1.0/(2*np.pi*R) + 1.0/(8*np.pi*R**7)*((l**4 + m**4 + n**4) - 3*(l**2*m**2 + l**2*n**2 + m**2*n**2)) + 1.0/(64*np.pi*R**13)*(23*(l**8 + m**8 + n**8) - 244*(l**6*m**2 + l**2*m**6 + m**6*n**2 + m**2*n**6 + l**2*n**6 + l**6*n**2) + 621*(l**4*m**4 + m**4*n**4 + l**4*n**4) - 228*(l**4*m**2*n**2 + l**2*m**4*n**2 + l**2*m**2*n**4)))
     return result
 
-
-for l in range(0,20):
-    for m in range(0, 20):
-        for n in range(0, 20):
-            fileID = open("Green.num_20", 'w')
+fileID = open("Green.num_20", 'w')
+for l in range(0,21):
+    for m in range(0, 21):
+        for n in range(0, 21):
             if np.sqrt(l**2 + m**2 + n**2) <= np.sqrt(300.0):
                 fileID.write(str(l) + ' ' + str(m) + ' ' + str(n) + ' ' + str(lattice_green_integrator(l,m,n)) + '\n')
-                fileID.close()
             else:  
                 fileID.write(str(l) + ' ' + str(m) + ' ' + str(n) + ' ' + str(lattice_green_integrator_high(l,m,n)) + '\n')
-                fileID.close()
-                    
+fileID.close()
 

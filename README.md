@@ -8,6 +8,10 @@ The following pipeline merges two separate code sets. The first code (gDDA) calc
 
 
 #Step 2: Running the code
+The set of scripts that will run the above codes live in the folder "pipeline". Small shapes (10 nm radius sphere) can be run locally. For larger shapes, it is adviced to use a supercomputer.
+* Design your shape using the template file "shape.f90". It is currently set up to run a 10 nm radius sphere.
+* Update system parameters in the file "parameters.input". (refractive indicies, thermal conductivities, etc.)
+*
 
 
 
